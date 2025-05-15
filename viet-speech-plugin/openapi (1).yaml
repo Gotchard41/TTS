@@ -1,0 +1,38 @@
+
+openapi: 3.0.1
+info:
+  title: TTS
+  version: v1
+  description: convert Vietnamese text to voice
+servers:
+  - url: https://yourserver.com  # <-- cần cập nhật sau khi deploy
+paths:
+  /tts:
+    post:
+      summary: Chuyển văn bản tiếng Việt thành giọng nói
+      operationId: convertTextToSpeech
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  description: Văn bản tiếng Việt cần chuyển đổi
+                  example: "Xin chào!"
+              required:
+                - text
+      responses:
+        '200':
+          description: File âm thanh được tạo thành công
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audio_url:
+                    type: string
+                    format: uri
+                    example: "https://yourserver.com/audio/output.mp3"
